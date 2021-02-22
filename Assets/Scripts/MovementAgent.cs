@@ -9,8 +9,13 @@ public class MovementAgent : MonoBehaviour
     [SerializeField]
     private Vector3 m_Target;
 
-    private const float TOLERANCE = 0.1f;
-    
+    private const float TOLERANCE = 0.0001f;
+
+    public void SetTarget(Vector3 target)
+    {
+        m_Target = target;
+    }
+
     void Update()
     {
         float distance = (m_Target - transform.position).magnitude;
