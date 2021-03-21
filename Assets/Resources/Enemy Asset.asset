@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartHealth: 100
   ViewPrefab: {fileID: -2944455205144840314, guid: c4f4f34dc70ac7648a83813127167739, type: 3}
+  IsFlyingEnemy: 0

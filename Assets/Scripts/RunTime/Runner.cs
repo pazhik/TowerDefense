@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Enemy;
+using EnemySpawn;
+using Field;
 using UnityEngine;
 
 namespace RunTime
@@ -16,11 +19,11 @@ namespace RunTime
                 return;
             }
             TickControllers();
-            
         }
 
         public void StartRunning()
         {
+            CreateAllControllers();
             OnStartControllers();
             m_IsRunning = true;
         }
@@ -33,8 +36,12 @@ namespace RunTime
 
         private void CreateAllControllers()
         {
-            m_Controllers = new List<IController>();    
-            m_Controllers.Add(new TestController());
+            m_Controllers = new List<IController>
+            {
+                new GridPointerController(Game.Player.GridHolder),
+                new EnemySpawnController(Game.CurrentLevel.SpawnWavesAsset, Game.Player.Grid),
+                new MovementController()
+            };
         }
 
         private void OnStartControllers()
@@ -49,7 +56,6 @@ namespace RunTime
                 {
                     Debug.LogError(e);
                 }
-                
             }
         }
         
@@ -65,7 +71,6 @@ namespace RunTime
                 {
                     Debug.LogError(e);
                 }
-                
             }
         }
         
@@ -81,7 +86,6 @@ namespace RunTime
                 {
                     Debug.LogError(e);
                 }
-                
             }
         }
     }

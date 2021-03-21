@@ -30,7 +30,7 @@ namespace Field
 
         public Grid Grid => m_Grid;
 
-        private void Awake()
+        public void CreateGrid()
         {
             m_Camera = Camera.main;
 
@@ -46,7 +46,7 @@ namespace Field
             m_Offset = transform.position -
                        (new Vector3(width, 0f, height) * 0.5f);
             
-            m_Grid = new Grid(m_GridWidth, m_GridHeight, m_Offset, m_NodeSize, m_TargetCoordinate, m_StartCoordinate);
+            m_Grid = new Grid(m_GridWidth, m_GridHeight, m_Offset, m_NodeSize, m_StartCoordinate,  m_TargetCoordinate);
         }
 
         private void OnValidate()
@@ -63,7 +63,7 @@ namespace Field
                        (new Vector3(width, 0f, height) * 0.5f);
         }
 
-        private void Update()
+        public void RaycastInGrid()
         {
             if (m_Grid == null || m_Camera == null)
             {
@@ -78,7 +78,7 @@ namespace Field
             {
                 if (hit.transform != transform)
                 {
-                    return;
+                    m_Grid.UnselectNode();
                 }
 
                 Vector3 hitPosition = hit.point;
