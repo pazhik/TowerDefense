@@ -69,34 +69,29 @@ namespace Field
             {
                 return;
             }
-
+        
             Vector3 mousePosition = Input.mousePosition;
-
+        
             Ray ray = m_Camera.ScreenPointToRay(mousePosition);
-
+        
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 if (hit.transform != transform)
                 {
                     m_Grid.UnselectNode();
                 }
-
+        
                 Vector3 hitPosition = hit.point;
                 Vector3 difference = hitPosition - m_Offset;
-
+        
                 int x = (int) (difference.x / m_NodeSize);
                 int y = (int) (difference.z / m_NodeSize);
-                
-                Debug.Log(x + " " + y);
+
+                // Debug.Log(x + " " + y);
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    bool canOccupy = false;
-                    m_Grid.TryOccupyNode(new Vector2Int(x, y), ref canOccupy);
-                    if (canOccupy)
-                    {
-                        m_Grid.UpdatePathFinding();
-                    }
+                    m_Grid.SelectCoordinate(m_Grid.GetNode(new Vector2Int(x, y)));
                 }
             }
         }

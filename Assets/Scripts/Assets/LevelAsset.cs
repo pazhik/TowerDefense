@@ -1,6 +1,9 @@
 ﻿using EnemySpawn;
+using Turret;
+using TurretSpawn;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Assets
 {
@@ -9,6 +12,6 @@ namespace Assets
     {
         public SceneAsset SceneAsset;
         public SpawnWavesAsset SpawnWavesAsset;
-
+        [FormerlySerializedAs("TurretMarkerAsset")] public TurretMarkerAsset TurretMarketAsset;
     }
 }

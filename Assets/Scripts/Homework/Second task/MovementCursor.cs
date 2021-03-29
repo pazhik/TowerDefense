@@ -17,8 +17,8 @@ namespace Field
 
         private Vector3 m_Offset;
         
-        [SerializeField]
-        private MovementAgent m_MovementAgent;
+        // [SerializeField]
+        // private MovementAgent m_MovementAgent;
         
         [SerializeField]
         private GameObject m_Cursor;
@@ -91,9 +91,9 @@ namespace Field
                 {
                     Vector3 target = new Vector3();
                     target.x = m_Offset.x + x * m_NodeSize + m_NodeSize / 2;
-                    target.y = m_MovementAgent.transform.position.y;
+                    // target.y = m_MovementAgent.transform.position.y;
                     target.z = m_Offset.z + z * m_NodeSize + m_NodeSize / 2;
-                    m_MovementAgent.SetTarget(target);
+                    // m_MovementAgent.SetTarget(target);
                 }
                 
             } else {

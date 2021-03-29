@@ -79,13 +79,13 @@ namespace Field
         }
 
         
-        public bool CanOccupy(Vector2Int coordinate)
+        public bool CanOccupy(Node tryNode)
         {
-            if (m_Grid.GetNode(coordinate).m_OccupationAvailability == OccupationAvailability.CanNotOccupy)
+            if (tryNode.m_OccupationAvailability == OccupationAvailability.CanNotOccupy)
             {
                 return false;
             }
-            if (m_Grid.GetNode(coordinate).m_OccupationAvailability == OccupationAvailability.CanOccupy)
+            if (tryNode.m_OccupationAvailability == OccupationAvailability.CanOccupy)
             {
                 return true;
             }
@@ -119,7 +119,7 @@ namespace Field
                     {
                         if (m_Start == neighbour.Coordinate)
                         {
-                            m_Grid.GetNode(coordinate).m_OccupationAvailability = OccupationAvailability.CanOccupy;
+                            tryNode.m_OccupationAvailability = OccupationAvailability.CanOccupy;
                             return true;
                         }
                         nodes[i][j] = false;
@@ -128,7 +128,7 @@ namespace Field
                 }
             }
 
-            m_Grid.GetNode(coordinate).m_OccupationAvailability = OccupationAvailability.CanNotOccupy;
+            tryNode.m_OccupationAvailability = OccupationAvailability.CanNotOccupy;
             return false;
         }
         

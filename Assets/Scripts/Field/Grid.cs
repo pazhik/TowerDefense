@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using RunTime;
 using UnityEngine;
 
 namespace Field
@@ -58,9 +59,10 @@ namespace Field
             return GetNode(m_TargetCoordinate);
         }
 
-        public void SelectCoordinate(Vector2Int coordinate)
+        public void SelectCoordinate(Node node)
         {
-            m_SelectedNode = GetNode(coordinate);
+            m_SelectedNode = node;
+            Debug.Log(m_Nodes[1, 0].Position.x - m_Nodes[0, 0].Position.x);
         }
 
         public void UnselectNode()
@@ -77,9 +79,7 @@ namespace Field
         {
             return m_SelectedNode;
         }
-
         
-
         public Node GetNode(Vector2Int coordinate)
         {
             return GetNode(coordinate.x, coordinate.y);
@@ -117,15 +117,60 @@ namespace Field
             m_Pathfinding.UpdateField();
         }
         
-        public void TryOccupyNode(Vector2Int coordinate, ref bool occupy)
+        public void TryOccupyNode(Node node, ref bool occupy)
         {
-            Node node = GetNode(coordinate.x, coordinate.y);
-            node.IsOccupied = !node.IsOccupied;
-            occupy = m_Pathfinding.CanOccupy(coordinate);
-            if (!occupy)
+            occupy = m_Pathfinding.CanOccupy(node);
+            if (occupy)
             {
                 node.IsOccupied = !node.IsOccupied;   
             }
+        }
+
+        public Node GetNodeAtPoint(Vector3 point)
+        {
+            float m_NodeSize = m_Nodes[1, 0].Position.x - m_Nodes[0, 0].Position.x;
+            Vector3 Offset = m_Nodes[0, 0].Position -  (new Vector3(m_NodeSize, 0f, m_NodeSize) * 0.5f);
+            Vector3 difference = point - Offset;
+            int x = (int) (difference.x / m_NodeSize);
+            int y = (int) (difference.z / m_NodeSize);
+            return GetNode(x, y);
+        }
+        
+        public List<Node> GetNodesInCircle(Vector3 point, float radius)
+        {
+            Vector3 nodeCenter;
+            float sqrRadius = radius * radius;
+            float halfNodeSize = (m_Nodes[1, 0].Position.x - m_Nodes[0, 0].Position.x) / 2;
+            List<Node> nodes = new List<Node>();
+            foreach (Node node in m_Nodes)
+            {
+                nodeCenter = node.Position;
+                Vector3 left = nodeCenter + new Vector3(halfNodeSize,0,0);
+                Vector3 right = nodeCenter + new Vector3(-halfNodeSize,0,0);
+                Vector3 up = nodeCenter + new Vector3(0, 0, halfNodeSize);
+                Vector3 down = nodeCenter + new Vector3(0, 0, -halfNodeSize);
+                Vector3 leftUp = nodeCenter + new Vector3(halfNodeSize,0,halfNodeSize);
+                Vector3 leftDown = nodeCenter + new Vector3(halfNodeSize,0,-halfNodeSize);
+                Vector3 rightUp = nodeCenter + new Vector3(-halfNodeSize,0,halfNodeSize);
+                Vector3 rightDown = nodeCenter + new Vector3(-halfNodeSize,0,-halfNodeSize);
+                float leftDistanceSqr = (left - point).sqrMagnitude;
+                float rightDistanceSqr = (right - point).sqrMagnitude;
+                float upDistanceSqr = (up - point).sqrMagnitude;
+                float downDistanceSqr = (down - point).sqrMagnitude;
+                float leftUpDistanceSqr = (leftUp - point).sqrMagnitude;
+                float leftDownDistanceSqr = (leftDown - point).sqrMagnitude;
+                float rightUpDistanceSqr = (rightUp - point).sqrMagnitude;
+                float rightDownDistanceSqr = (rightDown - point).sqrMagnitude;
+                if (leftDistanceSqr < sqrRadius || rightDistanceSqr < sqrRadius ||
+                    upDistanceSqr < sqrRadius || downDistanceSqr < sqrRadius ||
+                    leftUpDistanceSqr < sqrRadius || leftDownDistanceSqr < sqrRadius ||
+                    rightUpDistanceSqr < sqrRadius || rightDownDistanceSqr < sqrRadius)
+                {
+                    nodes.Add(node);
+                }
+            }
+
+            return nodes;
         }
     }
 }
