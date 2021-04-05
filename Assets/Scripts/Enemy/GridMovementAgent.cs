@@ -15,6 +15,8 @@ namespace Enemy
 
         private Transform m_Transform;
 
+        public Transform Transform => m_Transform;
+
         private EnemyData m_EnemyData;
 
         private Grid m_Grid;

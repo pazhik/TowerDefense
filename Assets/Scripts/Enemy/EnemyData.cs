@@ -1,17 +1,18 @@
 ﻿using System.Collections;
 using Assets;
+using UnityEditor;
 using UnityEngine;
 
 namespace Enemy
 {
     public class EnemyData
     {
-        private int m_Health;
+        private float m_Health;
         private EnemyView m_View;
 
-        public EnemyView View => m_View;
         public readonly EnemyAsset Asset;
-        
+        public EnemyView View => m_View;
+
         public EnemyData(EnemyAsset asset)
         {
             Asset = asset;
@@ -24,7 +25,7 @@ namespace Enemy
             m_View.AttachData(this);
         }
 
-        public void GetDamage(int damage)
+        public void GetDamage(float damage)
         {
             m_Health -= damage;
             if (m_Health < 0)

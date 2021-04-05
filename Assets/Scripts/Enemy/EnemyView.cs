@@ -28,5 +28,7 @@ namespace Enemy
                 m_MovementAgent = new GridMovementAgent(5f, transform, grid, m_Data);
             }
         }
+
+        
     }
 }

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595eb58ef70444fe93b05351cfc0540b, type: 3}
   m_Name: Bullet Weapon
   m_EditorClassIdentifier: 
-  RateOfFire: 5
+  RateOfFire: 1
   MaxDistance: 10
-  ProjectileAsset: {fileID: 11400000, guid: 757756cd10f45614f89a2cc1021a8d9f, type: 2}
+  ProjectileAsset: {fileID: 11400000, guid: 002ca8ef6df54634690ba09f9104bba2, type: 2}

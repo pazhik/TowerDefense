@@ -1,15 +1,14 @@
-﻿using System;
-using Enemy;
+﻿using Enemy;
 using UnityEngine;
 
-namespace Turret.Weapon.Projectile
+namespace Turret.Weapon.Projectile.Bullet
 {
     public class BulletProjectile: MonoBehaviour, IProjectile
     {
         private float m_Speed = 5;
         private bool m_DidHit = false;
         private EnemyData m_HitEnemy = null;
-        private int m_Damage = 10;
+        private float m_Damage = 10;
         public void TickApproaching()
         {
             transform.Translate(transform.forward * (m_Speed * Time.deltaTime), Space.World);
