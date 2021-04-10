@@ -3,5 +3,7 @@
     public interface IMovementAgent
     {
         void TickMovement();
+
+        public void Die();
     }
 }

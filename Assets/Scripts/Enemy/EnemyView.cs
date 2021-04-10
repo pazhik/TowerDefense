@@ -8,6 +8,7 @@ namespace Enemy
     {
         private EnemyData m_Data;
         private IMovementAgent m_MovementAgent;
+        [SerializeField] private Animator m_Animator;
 
         public EnemyData Data => m_Data;
         public IMovementAgent MovementAgent => m_MovementAgent;
@@ -21,14 +22,18 @@ namespace Enemy
         {
             if (m_Data.Asset.IsFlyingEnemy)
             {
-                m_MovementAgent = new FlyingMovementAgent(5f, transform, grid, m_Data);
+                m_MovementAgent = new FlyingMovementAgent(m_Data.Asset.Speed, transform, grid, m_Data);
             }
             else
             {
-                m_MovementAgent = new GridMovementAgent(5f, transform, grid, m_Data);
+                m_MovementAgent = new GridMovementAgent(m_Data.Asset.Speed, transform, grid, m_Data);
             }
         }
 
+        public void Die()
+        {
+            m_Animator.SetTrigger("Died");
+        }
         
     }
 }

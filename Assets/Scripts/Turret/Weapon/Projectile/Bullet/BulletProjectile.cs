@@ -9,6 +9,13 @@ namespace Turret.Weapon.Projectile.Bullet
         private bool m_DidHit = false;
         private EnemyData m_HitEnemy = null;
         private float m_Damage = 10;
+
+        public void SetAsset(BulletProjectileAsset asset)
+        {
+            m_Speed = asset.m_Speed;
+            m_Damage = asset.m_Damage;
+        }
+
         public void TickApproaching()
         {
             transform.Translate(transform.forward * (m_Speed * Time.deltaTime), Space.World);

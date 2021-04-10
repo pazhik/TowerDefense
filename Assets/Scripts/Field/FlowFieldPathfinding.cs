@@ -94,15 +94,17 @@ namespace Field
             queue.Enqueue(m_Target);
             int height = m_Grid.Height;
             int width = m_Grid.Width;
-            bool[][] nodes = new bool[height][];
-            for (int index = 0; index < height; index++)
+            bool[][] nodes = new bool[width][];
+            for (int index = 0; index < width; index++)
             {
-                nodes[index] = new bool[width];
+                nodes[index] = new bool[height];
             }
-
-            for (int i = 0; i < height; i++)
+            
+            
+            Debug.Log(height + " " + width);
+            for (int i = 0; i < width; i++)
             {
-                for (int j = 0; j < width; j++)
+                for (int j = 0; j < height; j++)
                 {
                     nodes[i][j] = true;
                 }
@@ -115,6 +117,7 @@ namespace Field
                 {
                     int i = neighbour.Coordinate.x;
                     int j = neighbour.Coordinate.y;
+                    
                     if (nodes[i][j])
                     {
                         if (m_Start == neighbour.Coordinate)

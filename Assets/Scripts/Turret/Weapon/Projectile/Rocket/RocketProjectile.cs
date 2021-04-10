@@ -19,6 +19,13 @@ namespace Turret.Weapon.Projectile.Rocket
             m_HitEnemy = enemyData;
         }
         
+        public void SetAsset(RocketProjectileAsset asset)
+        {
+            m_Speed = asset.m_Speed;
+            m_Damage = asset.m_Damage;
+        }
+
+        
         public void TickApproaching()
         {
             Vector3 direction = (m_HitEnemy.View.transform.position - transform.position).normalized;

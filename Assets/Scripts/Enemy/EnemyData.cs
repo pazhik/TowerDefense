@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Assets;
+using RunTime;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,12 +11,13 @@ namespace Enemy
         private float m_Health;
         private EnemyView m_View;
 
-        public readonly EnemyAsset Asset;
+        private EnemyAsset m_Asset;
+        public EnemyAsset Asset => m_Asset;
         public EnemyView View => m_View;
 
         public EnemyData(EnemyAsset asset)
         {
-            Asset = asset;
+            m_Asset = asset;
             m_Health = asset.StartHealth;
         }
 
@@ -36,6 +38,9 @@ namespace Enemy
 
         private void Die()
         {
+            m_View.Die();
+            Game.Player.EnemyDied(this);
+            m_View.MovementAgent.Die();
             Debug.Log("Die");
         }
     }
