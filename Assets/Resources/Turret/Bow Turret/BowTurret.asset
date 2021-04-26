@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ViewPrefab: {fileID: 7776245179207548678, guid: e64be9b523cec1445af926b09774b57d, type: 3}
   WeaponAsset: {fileID: 11400000, guid: 4c779176377b8954281b094e8d943b1a, type: 2}
+  Price: 20

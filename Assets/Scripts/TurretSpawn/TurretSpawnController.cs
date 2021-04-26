@@ -31,10 +31,21 @@ namespace TurretSpawn
                 Node selectedNode = m_Grid.GetSelectedNode();
                 bool canOccupy = false;
                 m_Grid.TryOccupyNode(selectedNode, ref canOccupy);
-                if (canOccupy)
+                if (!canOccupy)
                 {
-                    SpawnTurret(m_Market.ChosenTurret, selectedNode);
+                    return;
+                }
+
+                TurretAsset asset = m_Market.ChosenTurret;
+                if (asset != null)
+                {
+                    m_Market.BuyTurret(asset);
+                    SpawnTurret(asset, selectedNode);
                     m_Grid.UpdatePathFinding();
+                }
+                else
+                {
+                    Debug.Log("Not enough money");
                 }
             }
         }

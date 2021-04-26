@@ -33,7 +33,12 @@ namespace Enemy
         public void Die()
         {
             m_Animator.SetTrigger("Died");
+            Destroy(gameObject, 3f);
         }
         
+        public void ReachedTarget()
+        {
+            Destroy(gameObject);
+        }
     }
 }

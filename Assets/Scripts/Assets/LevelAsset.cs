@@ -13,5 +13,8 @@ namespace Assets
         public SceneAsset SceneAsset;
         public SpawnWavesAsset SpawnWavesAsset;
         [FormerlySerializedAs("TurretMarkerAsset")] public TurretMarkerAsset TurretMarketAsset;
+
+        public int StartHealth;
+        public int StartMoney;
     }
 }

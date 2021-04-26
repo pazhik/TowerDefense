@@ -39,7 +39,7 @@ namespace Turret.Weapon.Projectile
 
         private void TickTower()
         {
-            if (m_ClosestEnemyData != null)
+            if (m_ClosestEnemyData != null && !m_ClosestEnemyData.isDead)
             {
                 m_View.TowerLookAt(m_ClosestEnemyData.View.transform.position);
             }
